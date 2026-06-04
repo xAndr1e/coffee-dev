@@ -34,15 +34,6 @@ export default function About() {
                 />
               </div>
             </div>
-            {/* Floating review badge */}
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-espresso text-foam rounded-2xl px-6 py-4 text-center shadow-xl w-52">
-              <div className="font-display text-2xl font-bold text-latte mb-0.5">
-                ★ 4.9
-              </div>
-              <div className="font-body text-xs text-foam/60 tracking-wide">
-                Based on 226 reviews
-              </div>
-            </div>
           </div>
 
           {/* Right: text */}

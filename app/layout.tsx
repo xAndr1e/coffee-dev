@@ -22,7 +22,7 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Coffee.Dev — Brewed Fresh, Served Warm",
+  title: "Coffee.Dev",
   description:
     "A specialty coffee shop for developers and creatives. Exceptional coffee, warm atmosphere, fast WiFi.",
   openGraph: {
