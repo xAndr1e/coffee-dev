@@ -1,11 +1,14 @@
 import { supabase } from "@/lib/supabase";
 import ReviewForm from "./ReviewForm";
 
+export const revalidate = 0;
+
 export default async function Testimonials() {
   const { data: reviews } = await supabase
-    .from("reviews")
-    .select("*")
-    .limit(6);
+  .from("reviews")
+  .select("*")
+  .limit(6)
+  .order("created_at", { ascending: false });
 
   return (
     <section className="bg-foam py-24 px-6 lg:px-10">
