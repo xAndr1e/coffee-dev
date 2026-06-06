@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
+import { error } from "console";
 
 export default async function FeaturedMenu() {
   const { data: items } = await supabase
@@ -8,6 +9,9 @@ export default async function FeaturedMenu() {
     .select("*")
     .eq("featured", true)
     .limit(4);
+
+    console.log("items:", items);
+    console.log("error:", error);
 
   return (
     <section id="menu" className="bg-foam py-24 px-6 lg:px-10">
