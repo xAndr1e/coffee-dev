@@ -1,4 +1,5 @@
 import { MapPin, Clock, Phone, Mail } from "lucide-react";
+import ContactForm from "./ContactForm";
 
 const info = [
   {
@@ -42,7 +43,6 @@ export default function Contact() {
               Whether you're stopping by for a quick espresso or setting up your
               laptop for a full day's work — you're always welcome here.
             </p>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {info.map(({ icon: Icon, label, lines }) => (
                 <div
@@ -75,61 +75,9 @@ export default function Contact() {
             <p className="font-body text-sm text-foam/50 mb-8">
               Reservations, events, or just want to say hello.
             </p>
-
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block font-mono text-[10px] text-foam/40 uppercase tracking-widest mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    className="w-full bg-foam/10 border border-foam/15 rounded-xl px-4 py-3 font-body text-sm text-foam placeholder:text-foam/30 focus:outline-none focus:border-caramel/50 transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block font-mono text-[10px] text-foam/40 uppercase tracking-widest mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    placeholder="you@email.com"
-                    className="w-full bg-foam/10 border border-foam/15 rounded-xl px-4 py-3 font-body text-sm text-foam placeholder:text-foam/30 focus:outline-none focus:border-caramel/50 transition-colors"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block font-mono text-[10px] text-foam/40 uppercase tracking-widest mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  placeholder="How can we help?"
-                  className="w-full bg-foam/10 border border-foam/15 rounded-xl px-4 py-3 font-body text-sm text-foam placeholder:text-foam/30 focus:outline-none focus:border-caramel/50 transition-colors"
-                />
-              </div>
-
-              <div>
-                <label className="block font-mono text-[10px] text-foam/40 uppercase tracking-widest mb-2">
-                  Message
-                </label>
-                <textarea
-                  rows={4}
-                  placeholder="Tell us more..."
-                  className="w-full bg-foam/10 border border-foam/15 rounded-xl px-4 py-3 font-body text-sm text-foam placeholder:text-foam/30 focus:outline-none focus:border-caramel/50 transition-colors resize-none"
-                />
-              </div>
-
-              <button
-                type="button"
-                className="w-full bg-caramel hover:bg-latte text-espresso font-body font-semibold text-sm py-4 rounded-xl transition-colors duration-200 tracking-wide"
-              >
-                Send Message →
-              </button>
-            </div>
+            <ContactForm />
           </div>
+
         </div>
       </div>
     </section>

@@ -1,39 +1,36 @@
 import Image from "next/image";
+import { supabase } from "@/lib/supabase";
 
-const images = [
-  {
-    src: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&q=80",
-    alt: "Latte art closeup",
-    span: "col-span-2 row-span-2",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&q=80",
-    alt: "Coffee beans",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=600&q=80",
-    alt: "Espresso shot",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=800&q=80",
-    alt: "Café interior",
-    span: "col-span-1 row-span-2",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&q=80",
-    alt: "Croissants",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1459755486867-b55449bb39ff?w=600&q=80",
-    alt: "Coffee and laptop",
-    span: "col-span-1 row-span-1",
-  },
+
+
+export default async function Gallery() {
+  const {data: items, error} = await supabase
+  .from("gallery_images") 
+  .select("*") 
+  .limit(12);
+
+  const spanPatterns = [
+  "col-span-1 row-span-1",
+  "col-span-1 row-span-2",
+  "col-span-2 row-span-1",
+  "col-span-1 row-span-1",
+  "col-span-1 row-span-1",
+  "col-span-2 row-span-2",
+  "col-span-1 row-span-1",
+  "col-span-1 row-span-2",
+  "col-span-1 row-span-1",
+  "col-span-2 row-span-1",
+  "col-span-1 row-span-1",
+  "col-span-1 row-span-1",
 ];
 
-export default function Gallery() {
+  const images = items?.map((item, index) => ({
+  src: item.url,
+  alt: item.caption || "Coffee moment",
+  span: spanPatterns[index % spanPatterns.length],
+  })) || [];
+
+
   return (
     <section id="gallery" className="bg-espresso py-24 px-6 lg:px-10">
       <div className="max-w-7xl mx-auto">
