@@ -1,17 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
-import { error } from "console";
 
 export default async function FeaturedMenu() {
-  const { data: items } = await supabase
-    .from("menu_items")
-    .select("*")
-    .eq("featured", true)
-    .limit(4);
-
-    console.log("items:", items);
-    console.log("error:", error);
+  const { data: items, error } = await supabase
+  .from("menu_items")
+  .select("*")
+  .eq("featured", true)
+  .limit(4);
 
   return (
     <section id="menu" className="bg-foam py-24 px-6 lg:px-10">
@@ -35,7 +31,7 @@ export default async function FeaturedMenu() {
             <div key={item.id} className="group bg-white rounded-3xl overflow-hidden border border-cream-dark hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
               <div className="relative h-52 overflow-hidden bg-cream">
                 {item.image_url ? (
-                  <Image src={item.image_url} alt={item.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="25vw" />
+                  <img src={item.image_url} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 ) : (
                   <div className="w-full h-full bg-cream-dark flex items-center justify-center text-mocha/30 text-4xl">☕</div>
                 )}
