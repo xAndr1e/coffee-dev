@@ -32,7 +32,7 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-1 group">
-          <span className="font-display text-2xl font-bold text-espresso leading-none">
+          <span className="font-display text-2xl font-bold text-black leading-none">
             Coffee
           </span>
           <span className="font-mono text-lg text-caramel font-medium">.Dev</span>
@@ -44,7 +44,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="font-body text-sm text-mocha hover:text-caramel transition-colors duration-200 tracking-wide"
+              className="font-body font-bold text-md text-black hover:text-caramel transition-colors duration-200 tracking-wide"
             >
               {link.label}
             </Link>
