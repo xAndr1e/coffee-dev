@@ -5,6 +5,8 @@ export async function middleware(request: NextRequest) {
   return await updateSession(request)
 }
 
+export const runtime = 'nodejs' // ← add this
+
 export const config = {
   matcher: ['/staff/:path*'],
 }
