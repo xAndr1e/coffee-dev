@@ -32,10 +32,10 @@ export default function WeeklyRevenueChart({ data }: Props) {
             tickFormatter={v => `₱${v}`}
           />
           <Tooltip
-            formatter={(value: number) => [
-                `₱${value.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`,
-                'Revenue',
-            ]}
+            formatter={(value) => [
+            `₱${Number(value).toLocaleString('en-PH', { minimumFractionDigits: 2 })}`,
+            'Revenue',
+          ]}
             contentStyle={{
                 borderRadius: '10px',
                 border: 'none',
