@@ -55,7 +55,7 @@ async function getStats() {
     totalRevenue,
     orderCount,
     avgOrder,
-    topItem: (topItem?.products as any)?.name ?? '—',
+    topItem: (topItem?.products as { name: string }[] | null)?.[0]?.name ?? '—',
     weeklyData,
   }
 }
