@@ -8,7 +8,7 @@ type Transaction = {
   payment_method: string
   status: string
   created_at: string
-  employees: { full_name: string } | null
+  employees: { full_name: string }[] | null
 }
 
 type Tab = 'today' | 'week' | 'month'
@@ -106,7 +106,7 @@ export default function TransactionsTable({ transactions }: { transactions: Tran
                     })}
                   </td>
                   <td className="px-5 py-3 text-espresso">
-                    {t.employees?.full_name ?? '—'}
+                    {t.employees?.[0]?.full_name ?? '—'}
                   </td>
                   <td className="px-5 py-3 text-espresso capitalize">
                     {t.payment_method ?? '—'}
