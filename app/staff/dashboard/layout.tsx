@@ -13,7 +13,7 @@ export default async function DashboardLayout({
   if (!user) redirect('/staff/login')
 
   return (
-    <div className="flex min-h-screen bg-latte">
+    <div className="flex min-h-screen bg-white">
       <Sidebar />
       <main className="flex-1 p-6 overflow-y-auto">
         {children}

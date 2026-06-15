@@ -8,6 +8,7 @@ const navItems = [
   { label: 'Overview', href: '/staff/dashboard' },
   { label: 'Transactions', href: '/staff/dashboard/transactions' },
   { label: 'Menu', href: '/staff/dashboard/menu' },
+  { label: 'Orders', href: '/staff/dashboard/orders' },
 ]
 
 export default function Sidebar() {

@@ -23,7 +23,7 @@ export default function MenuTable({ initialProducts }: { initialProducts: Produc
 
   async function toggleField(id: string, field: 'available' | 'featured', current: boolean) {
     const { data } = await supabase
-      .from('products')
+      .from('menu_items')
       .update({ [field]: !current })
       .eq('id', id)
       .select()
@@ -35,8 +35,8 @@ export default function MenuTable({ initialProducts }: { initialProducts: Produc
   }
 
   async function deleteProduct(id: string) {
-    if (!confirm('Delete this product?')) return
-    await supabase.from('products').delete().eq('id', id)
+    if (!confirm('Delete this menu item?')) return
+    await supabase.from('menu_items').delete().eq('id', id)
     setProducts(prev => prev.filter(p => p.id !== id))
   }
 
@@ -77,7 +77,7 @@ export default function MenuTable({ initialProducts }: { initialProducts: Produc
                 <th className="px-5 py-3 text-right">Price</th>
                 <th className="px-5 py-3 text-center">Available</th>
                 <th className="px-5 py-3 text-center">Featured</th>
-                <th className="px-5 py-3"></th>
+                <th className="px-5 py-3 text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -119,7 +119,7 @@ export default function MenuTable({ initialProducts }: { initialProducts: Produc
                       />
                     </button>
                   </td>
-                  <td className="px-5 py-3 text-right">
+                  <td className="px-5 py-3 text-center">
                     <button
                       onClick={() => { setEditingProduct(p); setShowModal(true) }}
                       className="text-caramel hover:text-espresso text-xs mr-3 transition"
