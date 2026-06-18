@@ -1,38 +1,69 @@
 'use client'
 
-interface MenuItem {
+import { useState, useEffect } from 'react'
+import { createClient } from '@/utils/supabase/client'
+
+type MenuItem = {
     id: string
     name: string
     description: string
     price: number
-    image_url?: string
+    category: string
+    image_url: string | null
+    available: boolean
+    featured: boolean
 }
 
 interface MenuGridProps {
     onAddItem: (item: MenuItem) => void
 }
 
-// Placeholder items — swap with Supabase fetch later
-const MOCK_ITEMS: MenuItem[] = [
-    { id: '1', name: 'Espresso', description: 'Rich and bold espresso shot.', price: 120 },
-    { id: '2', name: 'Cappuccino', description: 'Espresso with steamed milk foam.', price: 150 },
-    { id: '3', name: 'Latte', description: 'Smooth espresso with lots of milk.', price: 160 },
-    { id: '4', name: 'Americano', description: 'Espresso diluted with hot water.', price: 130 },
-    { id: '5', name: 'Mocha', description: 'Espresso with chocolate and milk.', price: 170 },
-    { id: '6', name: 'Flat White', description: 'Velvety microfoam over espresso.', price: 155 },
-]
-
 export default function MenuGrid({ onAddItem }: MenuGridProps) {
+    const [items, setItems] = useState<MenuItem[]>([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchItems = async () => {
+            const supabase = createClient()
+
+            const { data, error } = await supabase
+                .from('menu_items')           // 👈 change to your actual table name
+                .select('*')
+                .eq('available', true)
+                .order('category')
+
+            if (error) {
+                console.error('Failed to fetch menu items:', error)
+            } else {
+                setItems(data ?? [])
+            }
+
+            setLoading(false)
+        }
+
+        fetchItems()
+    }, [])
+
+    if (loading) {
+        return (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {Array.from({ length: 6 }).map((_, i) => (
+                    <div key={i} className="bg-foam rounded-xl shadow p-4 h-48 animate-pulse" />
+                ))}
+            </div>
+        )
+    }
+
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {MOCK_ITEMS.map((item) => (
-                <div
-                    key={item.id}
-                    className="bg-foam rounded-xl shadow p-4 flex flex-col justify-between gap-3 hover:shadow-md transition-shadow"
-                >
-                    {/* Image placeholder */}
-                    <div className="w-full h-28 bg-cream rounded-lg flex items-center justify-center text-caramel text-3xl">
-                        ☕
+            {items.map((item) => (
+                <div key={item.id} className="bg-foam rounded-xl shadow p-4 flex flex-col justify-between gap-3 hover:shadow-md transition-shadow">
+                    <div className="w-full h-48 bg-cream rounded-lg overflow-hidden flex items-center justify-center text-caramel text-3xl">
+                        {item.image_url ? (
+                            <img src={item.image_url} alt={item.name} className="w-full h-full object-cover"/>
+                        ) : (
+                            <span>📷</span>
+                        )}
                     </div>
 
                     <div>

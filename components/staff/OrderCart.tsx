@@ -1,11 +1,14 @@
 'use client'
 
-interface MenuItem {
+type MenuItem = {
     id: string
     name: string
     description: string
     price: number
-    image_url?: string
+    category: string
+    image_url: string | null
+    available: boolean
+    featured: boolean
 }
 
 interface CartItem extends MenuItem {
@@ -28,7 +31,7 @@ export default function OrderCart({
     const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
     return (
-        <div className="bg-foam rounded-xl shadow flex flex-col h-[calc(100vh-8rem)] sticky top-8 overflow-hidden">
+        <div className="bg-foam rounded-xl shadow flex flex-col h-full overflow-hidden">
             {/* Header */}
             <div className="px-4 pt-4 pb-2 border-b border-cream">
                 <h2 className="text-lg font-semibold text-espresso">Current Order</h2>
@@ -90,11 +93,7 @@ export default function OrderCart({
                     <span className="text-sm font-semibold text-espresso">Total</span>
                     <span className="text-base font-bold text-caramel">₱{total.toFixed(2)}</span>
                 </div>
-                <button
-                    onClick={onCheckout}
-                    disabled={cartItems.length === 0}
-                    className="w-full bg-caramel text-white py-2 rounded-lg hover:bg-mocha transition-colors text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+                <button onClick={onCheckout} disabled={cartItems.length === 0} className="w-full bg-caramel text-white py-2 rounded-lg hover:bg-mocha transition-colors text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
                     Proceed to Checkout
                 </button>
             </div>

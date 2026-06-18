@@ -4,12 +4,15 @@ import { useState } from 'react'
 import MenuGrid from '@/components/staff/MenuGrid'
 import OrderCart from '@/components/staff/OrderCart'
 
-interface MenuItem {
+type MenuItem = {
     id: string
     name: string
     description: string
     price: number
-    image_url?: string
+    category: string
+    image_url: string | null
+    available: boolean
+    featured: boolean
 }
 
 interface CartItem extends MenuItem {
@@ -50,7 +53,9 @@ export default function POSPage() {
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 p-6 items-start">
-            <MenuGrid onAddItem={handleAddItem} />
+            <div className="overflow-y-auto max-h-[calc(100vh-180px)] pr-2">
+                <MenuGrid onAddItem={handleAddItem} />
+            </div>
             <OrderCart
                 cartItems={cartItems}
                 onUpdateQuantity={handleUpdateQuantity}
