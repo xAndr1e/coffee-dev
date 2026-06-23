@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 
-type Product = {
+type MenuItem = {
   id: string
   name: string
   category: string
@@ -14,23 +14,25 @@ type Product = {
 }
 
 type Props = {
-  product: Product | null
-  onSaved: (product: Product) => void
+  menu_item: MenuItem | null
+  onSaved: (menu_item: MenuItem) => void
   onClose: () => void
 }
 
-export default function MenuModal({ product, onSaved, onClose }: Props) {
+const CATEGORIES = ['coffee', 'food', 'pastry', 'tea']
+
+export default function MenuModal({ menu_item, onSaved, onClose }: Props) {
   const supabase = createClient()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   const [form, setForm] = useState({
-    name: product?.name ?? '',
-    category: product?.category ?? '',
-    price: product?.price?.toString() ?? '',
-    image_url: product?.image_url ?? '',
-    available: product?.available ?? true,
-    featured: product?.featured ?? false,
+    name: menu_item?.name ?? '',
+    category: menu_item?.category ?? '',
+    price: menu_item?.price?.toString() ?? '',
+    image_url: menu_item?.image_url ?? '',
+    available: menu_item?.available ?? true,
+    featured: menu_item?.featured ?? false,
   })
 
   function update(field: string, value: string | boolean) {
@@ -55,22 +57,24 @@ export default function MenuModal({ product, onSaved, onClose }: Props) {
       featured: form.featured,
     }
 
-    if (product) {
-      const { data } = await supabase
-        .from('products')
+    if (menu_item) {
+      const { data, error } = await supabase
+        .from('menu_items')
         .update(payload)
-        .eq('id', product.id)
+        .eq('id', menu_item.id)
         .select()
         .single()
 
+      if (error) setError(error.message)
       if (data) onSaved(data)
     } else {
-      const { data } = await supabase
-        .from('products')
+      const { data, error } = await supabase
+        .from('menu_items')
         .insert(payload)
         .select()
         .single()
 
+      if (error) setError(error.message)
       if (data) onSaved(data)
     }
 
@@ -81,13 +85,12 @@ export default function MenuModal({ product, onSaved, onClose }: Props) {
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
       <div className="bg-foam rounded-2xl shadow-xl w-full max-w-md p-6">
         <h3 className="text-lg font-semibold text-espresso mb-4">
-          {product ? 'Edit product' : 'Add product'}
+          {menu_item ? 'Edit menu item' : 'Add menu item'}
         </h3>
 
         <div className="flex flex-col gap-3">
           {[
             { label: 'Name', field: 'name', type: 'text' },
-            { label: 'Category', field: 'category', type: 'text' },
             { label: 'Price (₱)', field: 'price', type: 'number' },
             { label: 'Image URL', field: 'image_url', type: 'text' },
           ].map(({ label, field, type }) => (
@@ -101,6 +104,22 @@ export default function MenuModal({ product, onSaved, onClose }: Props) {
               />
             </div>
           ))}
+
+          <div>
+            <label className="block text-xs text-caramel mb-1">Category</label>
+            <select
+              value={form.category}
+              onChange={e => update('category', e.target.value)}
+              className="w-full border border-caramel/30 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-caramel bg-white"
+            >
+              <option value="">Select category</option>
+              {CATEGORIES.map(cat => (
+                <option key={cat} value={cat}>
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
 
           <div className="flex gap-6 mt-1">
             {[
