@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import MenuModal from './MenuModal'
 
-type Product = {
+type MenuItem = {
   id: string
   name: string
   category: string
@@ -14,9 +14,9 @@ type Product = {
   image_url: string | null
 }
 
-export default function MenuTable({ initialProducts }: { initialProducts: Product[] }) {
-  const [products, setProducts] = useState<Product[]>(initialProducts)
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null)
+export default function MenuTable({ initialProducts }: { initialProducts: MenuItem[] }) {
+  const [products, setProducts] = useState<MenuItem[]>(initialProducts)
+  const [editingProduct, setEditingProduct] = useState<MenuItem | null>(null)
   const [showModal, setShowModal] = useState(false)
 
   const supabase = createClient()
@@ -40,7 +40,7 @@ export default function MenuTable({ initialProducts }: { initialProducts: Produc
     setProducts(prev => prev.filter(p => p.id !== id))
   }
 
-  function handleSaved(product: Product) {
+  function handleSaved(product: MenuItem) {
     setProducts(prev => {
       const exists = prev.find(p => p.id === product.id)
       return exists
@@ -142,7 +142,7 @@ export default function MenuTable({ initialProducts }: { initialProducts: Produc
 
       {showModal && (
         <MenuModal
-          product={editingProduct}
+          menu_item={editingProduct}
           onSaved={handleSaved}
           onClose={() => { setShowModal(false); setEditingProduct(null) }}
         />

@@ -141,17 +141,10 @@ export default function MenuModal({ menu_item, onSaved, onClose }: Props) {
           {error && <p className="text-red-500 text-xs">{error}</p>}
 
           <div className="flex gap-2 mt-2">
-            <button
-              onClick={onClose}
-              className="flex-1 py-2 rounded-lg border border-caramel/30 text-sm text-caramel hover:bg-caramel/10 transition"
-            >
+            <button onClick={onClose} className="flex-1 py-2 rounded-lg border border-caramel/30 text-sm text-caramel hover:bg-caramel/10 transition">
               Cancel
             </button>
-            <button
-              onClick={handleSubmit}
-              disabled={loading}
-              className="flex-1 py-2 rounded-lg bg-espresso text-foam text-sm hover:bg-espresso/90 transition disabled:opacity-50"
-            >
+            <button onClick={handleSubmit} disabled={loading} className="flex-1 py-2 rounded-lg bg-espresso text-foam text-sm hover:bg-espresso/90 transition disabled:opacity-50">
               {loading ? 'Saving...' : 'Save'}
             </button>
           </div>
