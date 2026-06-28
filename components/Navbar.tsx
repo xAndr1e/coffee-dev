@@ -31,11 +31,14 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-1 group">
-          <span className="font-display text-2xl font-bold text-black leading-none">
-            Coffee
-          </span>
-          <span className="font-mono text-lg text-caramel font-medium">.Dev</span>
+        <Link href="/" className="flex items-center">
+          <img
+            src="/coffee_dev_logo.png"
+            alt="Coffee.Dev Logo"
+            width={160}
+            height={48}
+            className="h-24 w-auto object-contain"
+          />
         </Link>
 
         {/* Desktop nav */}

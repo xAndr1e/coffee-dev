@@ -30,6 +30,9 @@ export const metadata: Metadata = {
     description: "Brewed Fresh, Served Warm",
     type: "website",
   },
+  icons: {
+    icon: "/Logo.png",
+  }
 };
 
 export default function RootLayout({
