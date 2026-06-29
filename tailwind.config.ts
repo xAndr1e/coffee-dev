@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Existing tokens
         cream: "#F5F0E8",
         "cream-dark": "#EDE6D6",
         espresso: "#2C1810",
@@ -16,6 +17,11 @@ const config: Config = {
         caramel: "#C4832A",
         latte: "#D4A96A",
         foam: "#FAF7F2",
+
+        // Logo-derived tokens
+        golden: "#C9A05A",  // logo circle background — sidebar bg
+        roast: "#3B1A08",   // darkest cup shadow — active pills, headings
+        steam: "#A0722A",   // steam swirl mid-tone — muted/inactive text
       },
       fontFamily: {
         display: ["var(--font-playfair)", "Georgia", "serif"],

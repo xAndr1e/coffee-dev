@@ -22,31 +22,51 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="w-56 min-h-screen bg-espresso text-foam flex flex-col py-6 px-4">
-      <div className="mb-8">
-        <h1 className="text-lg font-semibold tracking-tight">coffee-dev</h1>
-        <p className="text-xs text-caramel mt-0.5">Staff Portal</p>
+    <aside className="w-56 min-h-screen bg-golden flex flex-col py-6 px-3">
+      {/* Logo */}
+      <div className="flex flex-col items-center mb-4">
+        <Link href="/staff/dashboard">
+          <img
+            src="/Banner_Logo.png"
+            alt="Coffee.Dev Logo"
+            className="h-24 w-auto object-contain"
+          />
+        </Link>
+        <p className="text-sm font-bold tracking-widest uppercase mt-2 text-roast/50">
+          Admin Dashboard
+        </p>
       </div>
 
-      <nav className="flex flex-col gap-1 flex-1">
-        {navItems.map(item => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`px-3 py-2 rounded-lg text-sm transition ${
-              pathname === item.href
-                ? 'bg-caramel/20 text-foam font-medium'
-                : 'text-foam/60 hover:text-foam hover:bg-white/10'
-            }`}
-          >
-            {item.label}
-          </Link>
-        ))}
+      {/* Divider */}
+      <div className="mx-2 mb-4 h-px bg-roast/15" />
+
+      {/* Nav */}
+      <nav className="flex flex-col gap-0.5 flex-1">
+        {navItems.map(item => {
+          const isActive = pathname === item.href
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
+                isActive
+                  ? 'bg-roast text-cream'
+                  : 'text-steam hover:text-roast hover:bg-roast/10'
+              }`}
+            >
+              {item.label}
+            </Link>
+          )
+        })}
       </nav>
 
+      {/* Divider */}
+      <div className="mx-2 mt-4 mb-3 h-px bg-roast/15" />
+
+      {/* Sign out */}
       <button
         onClick={handleLogout}
-        className="mt-auto px-3 py-2 text-sm text-foam/50 hover:text-foam hover:bg-white/10 rounded-lg transition text-left"
+        className="px-3 py-2 text-sm font-bold rounded-lg text-left text-steam/70 hover:text-roast hover:bg-roast/10 transition-colors"
       >
         Sign out
       </button>
