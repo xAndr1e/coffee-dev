@@ -29,15 +29,13 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-6 lg:px-10 h-28 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <img
-            src="/coffee_dev_logo.png"
+            src="/Banner_Logo.png"
             alt="Coffee.Dev Logo"
-            width={160}
-            height={48}
-            className="h-24 w-auto object-contain"
+            className=" h-32 w-auto object-contain"
           />
         </Link>
 
