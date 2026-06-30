@@ -35,7 +35,7 @@ export default function Navbar() {
           <img
             src="/Banner_Logo.png"
             alt="Coffee.Dev Logo"
-            className=" h-32 w-auto object-contain"
+            className=" h-24 w-auto object-contain"
           />
         </Link>
 
