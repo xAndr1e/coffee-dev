@@ -143,6 +143,12 @@ export default function StaffLoginPage() {
                 </>
               )}
             </button>
+            <p className="text-xs text-steam/60">
+              Test Email: test123@gmail.com
+            </p>
+            <p className="text-xs text-steam/60">
+              Test Password: testtest123
+            </p>
           </div>
 
           {/* Footer */}
