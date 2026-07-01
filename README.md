@@ -1,8 +1,34 @@
 # ☕ coffee-dev
 
-A full-stack café management web application built for a coffee shop in BGC, Taguig City, Metro Manila. Designed as a portfolio-grade project with real authentication, database security, and production deployment.
+A full-stack café management web application built for a coffee shop. Designed as a portfolio-grade project with real authentication, database security, and production deployment.
 
 The app has two distinct layers: a **customer-facing landing site** and a **staff dashboard** for internal operations.
+
+---
+
+## 🔑 Live Demo — Try the Staff Dashboard
+
+> **Recruiters / reviewers:** the fastest way to evaluate this project is to log into the staff dashboard directly.
+
+**Live site:** [coffee-dev.vercel.app](#) *(replace with your actual Vercel URL)*
+
+**Staff login:** `/staff/login`
+
+| Field | Value |
+|---|---|
+| URL | `https://<your-deployed-url>/staff/login` |
+| Email | `demo@coffeedev.app` *(replace with your demo account)* |
+| Password | `••••••••` *(replace with your demo account password)* |
+
+> ⚠️ **Note:** This is a read-only demo account seeded with sample data — no real business data is exposed. It has cashier/staff-level access so you can explore the POS, dashboard, and transactions table without needing admin permissions.
+
+Once logged in, a good tour is:
+1. **Sales Overview** (`/staff/dashboard`) — stat cards + weekly revenue chart
+2. **POS** (`/staff/pos`) — try building an order and checking out
+3. **Transactions** — filter by Today / This Week / This Month
+4. **Menu Management** — CRUD demo (toggle an item's availability)
+
+If you'd rather skip logging in, a full walkthrough with screenshots is below.
 
 ---
 
@@ -38,7 +64,7 @@ A custom token system built around a coffee aesthetic: `espresso`, `foam`, `cara
 
 ### 🧑‍💼 Staff Dashboard
 
-> Protected via Supabase Auth — accessible only to authenticated employees.
+> Protected via Supabase Auth — accessible only to authenticated employees. See [Live Demo](#-live-demo--try-the-staff-dashboard) above for access.
 
 - **Login Page** — Secure staff login at a non-public route (`/staff/login`)
 - **Sales Overview**
@@ -46,6 +72,7 @@ A custom token system built around a coffee aesthetic: `espresso`, `foam`, `cara
   - Weekly revenue bar chart (Recharts)
 - **Transactions Table** — Filterable by Today / This Week / This Month
 - **Menu Management** — Full CRUD for menu items via modal UI, with availability and featured toggles
+- **POS** — Menu grid + order cart, multiple payment methods (Cash, GCash, Card, Maya), writes directly to Supabase
 
 ---
 
@@ -89,6 +116,8 @@ All tables use **Row Level Security (RLS)** policies and performance indexes.
 - [ ] **Daily/Monthly Sales Reports** — Export-ready PDF or CSV reports
 - [ ] **Shift Scheduling** — Calendar-based shift planner for staff
 - [ ] **Customer Feedback Panel** — View and respond to submitted testimonials
+- [ ] **RBAC Enforcement** — Cashiers scoped to POS only; admins get full dashboard access
+- [ ] **Audit Logging** — Track sensitive actions (voids, refunds, discounts)
 
 ### Technical
 
